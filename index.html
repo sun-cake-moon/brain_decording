@@ -7,30 +7,35 @@
 <style>
   :root { --ink:#1a1a1a; --grey:#6b6b6b; --line:#e3e3e3; }
   * { box-sizing: border-box; }
-  body {
-    margin:0; background:#fbfaf8; color:var(--ink);
-    font-family: "Songti SC", "SimSun", "Noto Serif CJK SC", Georgia, serif;
-    line-height:1.85; -webkit-font-smoothing:antialiased;
-  }
-  main { max-width: 960px; margin:0 auto; padding: 72px 28px 96px; }
-  .eyebrow { font-size:12px; letter-spacing:.22em; color:var(--grey); text-transform:uppercase; }
-  h1 { font-size:34px; line-height:1.35; margin:14px 0 10px; font-weight:600; letter-spacing:.01em; }
+  body { margin:0; background:#fbfaf8; color:var(--ink);
+    font-family:"Songti SC","SimSun","Noto Serif CJK SC",Georgia,serif;
+    line-height:1.85; -webkit-font-smoothing:antialiased; }
+  main { max-width:1000px; margin:0 auto; padding:72px 28px 96px; }
+  .eyebrow { font-size:12px; letter-spacing:.22em; color:var(--grey); }
+  h1 { font-size:34px; line-height:1.35; margin:14px 0 10px; font-weight:600; }
   .lede { font-size:16px; color:#333; max-width:640px; margin:0 0 36px; }
-  .lede em { font-style:normal; background:linear-gradient(transparent 62%, #f2e6c9 62%); }
-  figure { margin:0 0 12px; }
-  img { width:100%; border:1px solid var(--line); display:block; }
-  figcaption { font-size:12.5px; color:var(--grey); margin-top:10px; letter-spacing:.02em; }
-  .stats { display:flex; flex-wrap:wrap; gap:36px; margin:44px 0 8px; padding:26px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
-  .stat b { display:block; font-size:26px; font-weight:600; letter-spacing:-.01em; }
+  .lede em { font-style:normal; background:linear-gradient(transparent 62%,#f2e6c9 62%); }
+  figure { margin:0; }
+  img { width:100%; display:block; border:1px solid var(--line); background:#fff; }
+  figcaption { font-size:12.5px; color:var(--grey); margin-top:9px; letter-spacing:.02em; }
+  figcaption em { font-style:normal; color:#9a9a9a; margin-left:8px; font-size:11.5px; }
+  .hero { margin-bottom:12px; }
+  .stats { display:flex; flex-wrap:wrap; gap:36px; margin:44px 0 8px; padding:26px 0;
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .stat b { display:block; font-size:26px; font-weight:600; }
   .stat span { font-size:12.5px; color:var(--grey); }
-  h2 { font-size:15px; letter-spacing:.14em; color:var(--grey); font-weight:600; margin:56px 0 14px; }
+  h2 { font-size:15px; letter-spacing:.14em; color:var(--grey); font-weight:600; margin:64px 0 6px; }
+  h2 span { font-size:12px; letter-spacing:.05em; color:#9a9a9a; margin-left:10px; }
   p { margin:0 0 16px; max-width:720px; }
-  ol { padding-left:22px; max-width:720px; }
-  li { margin-bottom:10px; }
+  ol { padding-left:22px; max-width:720px; } li { margin-bottom:10px; }
   .note { font-size:13px; color:var(--grey); border-left:2px solid var(--line); padding-left:16px; margin-top:28px; }
-  a { color:inherit; }
-  footer { margin-top:64px; font-size:12.5px; color:var(--grey); }
-  @media (max-width:640px){ h1{font-size:26px} main{padding:48px 20px 64px} .stats{gap:24px} }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:26px; margin-top:22px; }
+  .grid.small { grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:16px; }
+  .grid.small figcaption { font-size:11px; margin-top:5px; }
+  a { color:inherit; text-decoration:none; }
+  a:hover img { border-color:#bbb; }
+  footer { margin-top:72px; font-size:12.5px; color:var(--grey); border-top:1px solid var(--line); padding-top:20px; }
+  @media (max-width:640px){ h1{font-size:26px} main{padding:48px 20px 64px} .stats{gap:24px} .grid{gap:18px} }
 </style>
 </head>
 <body>
@@ -40,8 +45,8 @@
   <p class="lede">让一个人看一张照片，只记录他大脑的活动，然后用计算机把这幅照片重新画出来。
   <em>这不是比喻</em>——第三行画面生成时，计算机从未接触过原图。</p>
 
-  <figure>
-    <img src="对比图_best_n12.png" alt="原图 / 低层重建 / 最终生成 三行对比">
+  <figure class="hero">
+    <a href="web/overview_best.jpg" target="_blank" rel="noopener"><img src="web/overview_best.jpg" alt="原图 / 低层重建 / 最终生成 三行对比"></a>
     <figcaption>上行：被试真实看到的照片　中行：仅由脑信号解出的低层重建　下行：扩散模型补全细节后的最终生成</figcaption>
   </figure>
 
@@ -60,6 +65,134 @@
     <li>语义指纹负责「是什么」，布局草图负责「在哪里」，扩散模型负责把细节补回来。</li>
   </ol>
 
+  <h2>单行切片<span>点开看大图</span></h2>
+  <div class="grid">
+      <figure class="cell">
+        <a href="web/row_单行_1_原图_best_n12.jpg" target="_blank" rel="noopener"><img loading="lazy" src="web/row_单行_1_原图_best_n12.jpg" alt="原图 · 被试真实看到"></a>
+        <figcaption>原图 · 被试真实看到<em>按指标挑选</em></figcaption>
+      </figure>
+      <figure class="cell">
+        <a href="web/row_单行_1_原图_spread_n12.jpg" target="_blank" rel="noopener"><img loading="lazy" src="web/row_单行_1_原图_spread_n12.jpg" alt="原图 · 被试真实看到"></a>
+        <figcaption>原图 · 被试真实看到<em>按分布覆盖</em></figcaption>
+      </figure>
+      <figure class="cell">
+        <a href="web/row_单行_2_低层重建_best_n12.jpg" target="_blank" rel="noopener"><img loading="lazy" src="web/row_单行_2_低层重建_best_n12.jpg" alt="低层重建 · 仅由脑信号解出"></a>
+        <figcaption>低层重建 · 仅由脑信号解出<em>按指标挑选</em></figcaption>
+      </figure>
+      <figure class="cell">
+        <a href="web/row_单行_2_低层重建_spread_n12.jpg" target="_blank" rel="noopener"><img loading="lazy" src="web/row_单行_2_低层重建_spread_n12.jpg" alt="低层重建 · 仅由脑信号解出"></a>
+        <figcaption>低层重建 · 仅由脑信号解出<em>按分布覆盖</em></figcaption>
+      </figure>
+      <figure class="cell">
+        <a href="web/row_单行_3_最终生成_best_n12.jpg" target="_blank" rel="noopener"><img loading="lazy" src="web/row_单行_3_最终生成_best_n12.jpg" alt="最终生成 · 扩散补全"></a>
+        <figcaption>最终生成 · 扩散补全<em>按指标挑选</em></figcaption>
+      </figure>
+      <figure class="cell">
+        <a href="web/row_单行_3_最终生成_spread_n12.jpg" target="_blank" rel="noopener"><img loading="lazy" src="web/row_单行_3_最终生成_spread_n12.jpg" alt="最终生成 · 扩散补全"></a>
+        <figcaption>最终生成 · 扩散补全<em>按分布覆盖</em></figcaption>
+      </figure>
+  </div>
+
+  <h2>单个样本<span>24 组 · 每组三行</span></h2>
+  <div class="grid small">
+      <figure class="cell small">
+        <a href="web/s_样本0000.jpg" target="_blank" rel="noopener"><img loading="lazy" src="web/s_样本0000.jpg" alt="样本0000"></a>
+        <figcaption>0000</figcaption>
+      </figure>
+      <figure class="cell small">
+        <a href="web/s_样本0081.jpg" target="_blank" rel="noopener"><img loading="lazy" src="web/s_样本0081.jpg" alt="样本0081"></a>
+        <figcaption>0081</figcaption>
+      </figure>
+      <figure class="cell small">
+        <a href="web/s_样本0160.jpg" target="_blank" rel="noopener"><img loading="lazy" src="web/s_样本0160.jpg" alt="样本0160"></a>
+        <figcaption>0160</figcaption>
+      </figure>
+      <figure class="cell small">
+        <a href="web/s_样本0162.jpg" target="_blank" rel="noopener"><img loading="lazy" src="web/s_样本0162.jpg" alt="样本0162"></a>
+        <figcaption>0162</figcaption>
+      </figure>
+      <figure class="cell small">
+        <a href="web/s_样本0233.jpg" target="_blank" rel="noopener"><img loading="lazy" src="web/s_样本0233.jpg" alt="样本0233"></a>
+        <figcaption>0233</figcaption>
+      </figure>
+      <figure class="cell small">
+        <a href="web/s_样本0239.jpg" target="_blank" rel="noopener"><img loading="lazy" src="web/s_样本0239.jpg" alt="样本0239"></a>
+        <figcaption>0239</figcaption>
+      </figure>
+      <figure class="cell small">
+        <a href="web/s_样本0243.jpg" target="_blank" rel="noopener"><img loading="lazy" src="web/s_样本0243.jpg" alt="样本0243"></a>
+        <figcaption>0243</figcaption>
+      </figure>
+      <figure class="cell small">
+        <a href="web/s_样本0324.jpg" target="_blank" rel="noopener"><img loading="lazy" src="web/s_样本0324.jpg" alt="样本0324"></a>
+        <figcaption>0324</figcaption>
+      </figure>
+      <figure class="cell small">
+        <a href="web/s_样本0405.jpg" target="_blank" rel="noopener"><img loading="lazy" src="web/s_样本0405.jpg" alt="样本0405"></a>
+        <figcaption>0405</figcaption>
+      </figure>
+      <figure class="cell small">
+        <a href="web/s_样本0486.jpg" target="_blank" rel="noopener"><img loading="lazy" src="web/s_样本0486.jpg" alt="样本0486"></a>
+        <figcaption>0486</figcaption>
+      </figure>
+      <figure class="cell small">
+        <a href="web/s_样本0540.jpg" target="_blank" rel="noopener"><img loading="lazy" src="web/s_样本0540.jpg" alt="样本0540"></a>
+        <figcaption>0540</figcaption>
+      </figure>
+      <figure class="cell small">
+        <a href="web/s_样本0567.jpg" target="_blank" rel="noopener"><img loading="lazy" src="web/s_样本0567.jpg" alt="样本0567"></a>
+        <figcaption>0567</figcaption>
+      </figure>
+      <figure class="cell small">
+        <a href="web/s_样本0610.jpg" target="_blank" rel="noopener"><img loading="lazy" src="web/s_样本0610.jpg" alt="样本0610"></a>
+        <figcaption>0610</figcaption>
+      </figure>
+      <figure class="cell small">
+        <a href="web/s_样本0648.jpg" target="_blank" rel="noopener"><img loading="lazy" src="web/s_样本0648.jpg" alt="样本0648"></a>
+        <figcaption>0648</figcaption>
+      </figure>
+      <figure class="cell small">
+        <a href="web/s_样本0695.jpg" target="_blank" rel="noopener"><img loading="lazy" src="web/s_样本0695.jpg" alt="样本0695"></a>
+        <figcaption>0695</figcaption>
+      </figure>
+      <figure class="cell small">
+        <a href="web/s_样本0721.jpg" target="_blank" rel="noopener"><img loading="lazy" src="web/s_样本0721.jpg" alt="样本0721"></a>
+        <figcaption>0721</figcaption>
+      </figure>
+      <figure class="cell small">
+        <a href="web/s_样本0729.jpg" target="_blank" rel="noopener"><img loading="lazy" src="web/s_样本0729.jpg" alt="样本0729"></a>
+        <figcaption>0729</figcaption>
+      </figure>
+      <figure class="cell small">
+        <a href="web/s_样本0810.jpg" target="_blank" rel="noopener"><img loading="lazy" src="web/s_样本0810.jpg" alt="样本0810"></a>
+        <figcaption>0810</figcaption>
+      </figure>
+      <figure class="cell small">
+        <a href="web/s_样本0811.jpg" target="_blank" rel="noopener"><img loading="lazy" src="web/s_样本0811.jpg" alt="样本0811"></a>
+        <figcaption>0811</figcaption>
+      </figure>
+      <figure class="cell small">
+        <a href="web/s_样本0874.jpg" target="_blank" rel="noopener"><img loading="lazy" src="web/s_样本0874.jpg" alt="样本0874"></a>
+        <figcaption>0874</figcaption>
+      </figure>
+      <figure class="cell small">
+        <a href="web/s_样本0891.jpg" target="_blank" rel="noopener"><img loading="lazy" src="web/s_样本0891.jpg" alt="样本0891"></a>
+        <figcaption>0891</figcaption>
+      </figure>
+      <figure class="cell small">
+        <a href="web/s_样本0918.jpg" target="_blank" rel="noopener"><img loading="lazy" src="web/s_样本0918.jpg" alt="样本0918"></a>
+        <figcaption>0918</figcaption>
+      </figure>
+      <figure class="cell small">
+        <a href="web/s_样本0978.jpg" target="_blank" rel="noopener"><img loading="lazy" src="web/s_样本0978.jpg" alt="样本0978"></a>
+        <figcaption>0978</figcaption>
+      </figure>
+      <figure class="cell small">
+        <a href="web/s_样本0979.jpg" target="_blank" rel="noopener"><img loading="lazy" src="web/s_样本0979.jpg" alt="样本0979"></a>
+        <figcaption>0979</figcaption>
+      </figure>
+  </div>
+
   <h2>它为什么美</h2>
   <p>人看过的东西，已经被时间带走了，但它还留在脑子里。这个项目做的，是把它重新召唤出来——
   一个人看了一眼，他的脑子记住了，而我们把它取了出来。</p>
@@ -68,7 +201,8 @@
   最后是靠人眼发现的。打分的东西不知道它好不好看。</p>
 
   <footer>
-    《美不会绝迹——我的审美手记》素材附录 · 方法参考 MindEye (2023) · 数据集 NSD (Nature Neuroscience, 2022)
+    《美不会绝迹——我的审美手记》素材附录 · 方法参考 MindEye (2023) · 数据集 NSD (Nature Neuroscience, 2022)<br>
+    全部图片见 <a href="https://github.com/sun-cake-moon/brain_decording">GitHub 仓库</a>（含无标签版本与生成脚本）
   </footer>
 </main>
 </body>
